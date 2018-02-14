@@ -1,4 +1,4 @@
-function countLetters(line){
+function letterIndex(line){
   var letterPositioning = {};
   for(var i = 0; i < line.length; i++){
     if(typeof letterPositioning[line[i]] === "object"){
@@ -10,4 +10,4 @@ function countLetters(line){
   delete letterPositioning[' ']
   return letterPositioning;
 }
-console.log(countLetters("lighthouse in the house"));
+console.log(letterIndex("lighthouse in the house"));
