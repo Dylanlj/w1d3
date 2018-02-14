@@ -1,9 +1,6 @@
 function countLetters(line){
   var numberCount = {};
-  var string = line.split(' ');
-  string = string.join();
-  console.log(string);
-
+  var string = line.replace(/\s/g, '');
   for(var i = 0; i < string.length; i++){
      if(numberCount[string[i]] >= 1){
         numberCount[string[i]] += 1;
@@ -14,5 +11,3 @@ function countLetters(line){
   return numberCount;
 }
 console.log(countLetters("lighthouse in the house"));
-
-// now you just need to get rid of the commas
