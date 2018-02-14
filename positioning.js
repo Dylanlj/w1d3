@@ -1,7 +1,7 @@
 function letterIndex(line){
   var letterPositioning = {};
   for(var i = 0; i < line.length; i++){
-    if(typeof letterPositioning[line[i]] === "object"){
+    if(letterPositioning[line[i]] === "object"){
       letterPositioning[line[i]].push(i);
       continue;
     }
