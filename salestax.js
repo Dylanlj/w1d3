@@ -23,50 +23,40 @@ var companySalesData = [
 ];
 
 function calculateSalesTax(salesData, taxRates) {
-  var finalTax = {
-  }
-  populateObject();
-  totalSum();
-  // addTax();
+  var finalTax = {};
 
-  function populateObject(){
-    for(var i = 0; i < salesData.length; i++){
-      var currentCompany = salesData[i]['name'];
-      finalTax[currentCompany] = {};
-      finalTax[currentCompany]['totalSales'] = 0;
-      finalTax[currentCompany]['totalTaxes'] = 0;
-
+  for(var i = 0; i < salesData.length; i++){
+    var currentCompany = salesData[i]['name'];
+    if(!finalTax[currentCompany]){
+      populateObject(currentCompany);
     };
+    finalTax[currentCompany].totalSales += totalSum(currentCompany, i);
+    finalTax[currentCompany].totalTaxes += addTax(currentCompany, i);
   };
 
-  function totalSum(){
-    for(var p = 0 ; p < salesData.length; p++){
-      var currentCompany = salesData[p]['name'];
-      var arrayOfSales = salesData[p]['sales'];
-      for(var x = 0; x < arrayOfSales.length; x++){
-        var currentSale = salesData[p]['sales'][x];
-        finalTax[currentCompany]['totalSales'] += currentSale;
-      };
-    } ;
+  function populateObject(company){
+      var company = salesData[i]['name'];
+      finalTax[company] = {};
+      finalTax[company]['totalSales'] = 0;
+      finalTax[company]['totalTaxes'] = 0;
   };
 
-  // function addTax(){
-  //   for(var j = 0; j < salesData.length; j++){
-  //     var currentCompany = salesData[p]['name'];
-      
-  //   }
-  // }
+  function totalSum(company, indexOfCompany){
+    var sum = 0;
+    var arrayOfSales = salesData[indexOfCompany].sales;
+      for(var p = 0; p < arrayOfSales.length; p++){
+        sum += salesData[indexOfCompany]['sales'][p];
+      }
+    return sum
+  };
 
-
-
-  
-
-
-
-
-
-  console.log(finalTax);
+  function addTax(company, indexOfCompany){
+    var saleToTax = totalSum(company, indexOfCompany);
+    var taxToApply = taxRates[salesData[indexOfCompany]['province']];
+    return (saleToTax * taxToApply);
+  };
+return finalTax;
 }
 
 var results = calculateSalesTax(companySalesData, salesTaxRates);
-//console.log(results)
+console.log(results);
